@@ -15,10 +15,17 @@ questions by https://github.com/efficience-it.
 
 ## Installation and update
 
-### Using Composer
+Clone the repository
 
 ```
-$ composer create-project certificationy/certificationy-cli
+$ git clone git@github.com:andrew-demb/certificationy-cli.git
+$ cd certificationy-cli
+```
+
+### With Composer
+
+```
+$ composer install
 $ php certificationy.php
 ```
 
