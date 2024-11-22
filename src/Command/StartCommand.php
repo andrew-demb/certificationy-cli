@@ -11,8 +11,8 @@
 
 namespace Certificationy\Cli\Command;
 
+use Certificationy\Cli\Loaders\YamlLoader as Loader;
 use Certificationy\Collections\Questions;
-use Certificationy\Loaders\YamlLoader as Loader;
 use Certificationy\Set;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -37,9 +37,6 @@ class StartCommand extends Command
      */
     public const WORDWRAP_NUMBER = 80;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -54,9 +51,6 @@ class StartCommand extends Command
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = $this->path(is_string($input->getOption('config')) ? $input->getOption('config') : null);
@@ -110,7 +104,7 @@ class StartCommand extends Command
                     $questionCount++,
                     $question->getCategory(),
                     $question->getQuestion(),
-                    ($hideMultipleChoice === true ? '' : "\n" . 'This question <comment>' . ($question->isMultipleChoice() === true ? 'IS' : 'IS NOT') . '</comment> multiple choice.')
+                    $hideMultipleChoice === true ? '' : "\n" . 'This question <comment>' . ($question->isMultipleChoice() === true ? 'IS' : 'IS NOT') . '</comment> multiple choice.'
                 ),
                 $question->getAnswersLabels()
             );
