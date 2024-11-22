@@ -1,6 +1,6 @@
 {
     "name": "certificationy/certificationy-cli",
-    "type": "library",
+    "type": "project",
     "description": "A CLI tool to train certifications",
     "keywords": [
         "symfony",
@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.3",
         "symfony/console": "^4.4 || ^5.4 || ^6.0",
         "certificationy/certificationy": "^2.0",
         "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
