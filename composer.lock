@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b79bb121b63bc5c32858bc88fe2f4897",
+    "content-hash": "e8e2e9bd151e40687880dbdc6b48c70f",
     "packages": [
         {
             "name": "certificationy/certificationy",
@@ -109,35 +109,32 @@
             "time": "2019-02-07T10:04:27+00:00"
         },
         {
-            "name": "certificationy/symfony-pack",
-            "version": "1.6.1",
+            "name": "efficience_it/certification-symfony",
+            "version": "7.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/certificationy/symfony-pack.git",
-                "reference": "bedd08ae86efefc3662aaf9b7c80ab1a2195a517"
+                "url": "https://github.com/efficience-it/certification-symfony.git",
+                "reference": "7768d4616fb5fa4df7aabc602811a46a38772fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/certificationy/symfony-pack/zipball/bedd08ae86efefc3662aaf9b7c80ab1a2195a517",
-                "reference": "bedd08ae86efefc3662aaf9b7c80ab1a2195a517",
+                "url": "https://api.github.com/repos/efficience-it/certification-symfony/zipball/7768d4616fb5fa4df7aabc602811a46a38772fd1",
+                "reference": "7768d4616fb5fa4df7aabc602811a46a38772fd1",
                 "shasum": ""
             },
-            "require-dev": {
-                "certificationy/yaml-linter": "v1.0.1"
-            },
-            "type": "certificationy-pack",
-            "notification-url": "https://packagist.org/downloads/",
+            "default-branch": true,
+            "type": "library",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Mickaël Andrieu",
-                    "email": "andrieu.travail@gmail.com"
+                    "name": "Louis-Arnaud Catoire",
+                    "email": "la.catoire@gmail.com"
                 }
             ],
-            "description": "A series of questions to prepare for the certification Symfony2",
-            "homepage": "http://github.com/certificationy/symfony-pack",
+            "description": "A series of questions to prepare for the certification Symfony5-6-7",
+            "homepage": "https://github.com/efficience-it/certification-symfony",
             "keywords": [
                 "certification",
                 "exam",
@@ -145,10 +142,10 @@
                 "test"
             ],
             "support": {
-                "issues": "https://github.com/certificationy/symfony-pack/issues",
-                "source": "https://github.com/certificationy/symfony-pack/tree/1.6.1"
+                "source": "https://github.com/efficience-it/certification-symfony/tree/7.0",
+                "issues": "https://github.com/efficience-it/certification-symfony/issues"
             },
-            "time": "2018-05-29T18:27:27+00:00"
+            "time": "2024-11-08T08:21:22+00:00"
         },
         {
             "name": "psr/container",
@@ -4603,7 +4600,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "efficience_it/certification-symfony": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

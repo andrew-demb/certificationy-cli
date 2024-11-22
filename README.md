@@ -6,7 +6,8 @@
 
 > This is the CLI tool to train on certifications.
 
-**Note**: forked from https://github.com/certificationy/certificationy-cli and updated deps.
+**Note**: forked from https://github.com/certificationy/certificationy-cli, updated deps and switched to the maintained
+questions by https://github.com/efficience-it.
 
 ## How it looks?
 

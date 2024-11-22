@@ -23,11 +23,11 @@
     ],
     "require": {
         "php": "^8.3",
-        "symfony/console": "^4.4 || ^5.4 || ^6.0",
         "certificationy/certificationy": "^2.0",
-        "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
-        "certificationy/symfony-pack": "^1.4",
-        "certificationy/php-pack": "^1.5"
+        "efficience_it/certification-symfony": "7.0.x-dev",
+        "certificationy/php-pack": "^1.5",
+        "symfony/console": "^4.4 || ^5.4 || ^6.0",
+        "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
@@ -42,6 +42,12 @@
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:efficience-it/certification-symfony.git"
+        }
+    ],
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"

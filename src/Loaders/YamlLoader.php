@@ -10,6 +10,7 @@ use Certificationy\Collections\Questions;
 use Certificationy\Interfaces\LoaderInterface;
 use Certificationy\Question;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -36,7 +37,7 @@ final class YamlLoader implements LoaderInterface
 
     public function load(int $nbQuestions, array $categories): Questions
     {
-        $data = $this->prepareFromYaml($categories, $this->paths);
+        $data = $this->prepareFromYaml($categories);
         $dataMax = count($data);
         $nbQuestions = min($nbQuestions, $dataMax);
 
@@ -53,11 +54,11 @@ final class YamlLoader implements LoaderInterface
                 $answers->addAnswer(new Answer($dataAnswer['value'], $dataAnswer['correct']));
             }
 
-            if (!isset($item['shuffle']) || true === $item['shuffle']) {
+            if (false === isset($item['shuffle']) || true === $item['shuffle']) {
                 $answers->shuffle();
             }
 
-            $help = isset($item['help']) ? $item['help'] : null;
+            $help = $item['help'] ?? null;
 
             $questions->add($key, new Question($item['question'], $item['category'], $answers, $help));
         }
@@ -80,7 +81,7 @@ final class YamlLoader implements LoaderInterface
     public function categories(): array
     {
         $categories = [];
-        $files = $this->prepareFromYaml([], $this->paths);
+        $files = $this->prepareFromYaml();
 
         foreach ($files as $file) {
             $categories[] = $file['category'];
@@ -103,9 +104,9 @@ final class YamlLoader implements LoaderInterface
 
             foreach ($files as $file) {
                 $fileData = Yaml::parse($file->getContents());
-                $category = $fileData['category'];
+                $category = $this->resolveCategory($fileData, $file);
 
-                if (count($categories) > 0 && !in_array($category, $categories)) {
+                if (count($categories) > 0 && false === \in_array($category, $categories, true)) {
                     continue;
                 }
 
@@ -118,5 +119,16 @@ final class YamlLoader implements LoaderInterface
         }
 
         return $data;
+    }
+
+    private function resolveCategory(array $fileData, SplFileInfo $file): string
+    {
+        if (\array_key_exists('category', $fileData)) {
+            return $fileData['category'];
+        }
+
+        $filePath = $file->getPath();
+
+        return \sprintf('%s/%s', \basename($filePath), $file->getFilenameWithoutExtension());
     }
 }

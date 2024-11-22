@@ -1,1 +1,3 @@
-paths: ["vendor/certificationy/symfony-pack/data", "vendor/certificationy/php-pack/data"]
+paths:
+  - 'vendor/efficience_it/certification-symfony/data'
+  - 'vendor/certificationy/php-pack/data'
