@@ -1,4 +1,4 @@
-DC=docker-compose
+DC=docker compose
 RUN=$(DC) run --rm app
 
 .DEFAULT_GOAL := help

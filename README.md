@@ -13,6 +13,7 @@
 ## Installation and update
 
 ### Using Composer
+
 ```
 $ composer create-project certificationy/certificationy-cli
 $ php certificationy.php
@@ -25,7 +26,7 @@ $ php certificationy.php
 The project has prerequisites:
 
 - [Docker][docker] (1.12+)
-- [Docker-composer][docker-compose] (1.10+)
+- [Docker compose][docker compose] (2.0+)
 - [GNU make][make]
 
 To install Docker, refer to the official documentation for your operating system: https://docs.docker.com/install/.
@@ -38,16 +39,16 @@ Docker version 1.12.4, build 1564f02
 ```
 > You must use the minimum version 1.12 of Docker.
 
-To install the docker-composer, please also refer to the official documentation: https://docs.docker.com/compose/install/.
+To install the docker compose, please also refer to the official documentation: https://docs.docker.com/compose/install/.
 
-Once docker-composes installed (install it globally to be able and access from anywhere), to check its proper functioning, run `docker-compose -v`, you should get something like suit:
+Once docker compose installed (install it globally to be able and access from anywhere), to check its proper functioning, run `docker compose version`, you should get something like this:
 
 ```
-$ docker-compose -v
-Docker-composer version 1.10.0, build 4bd6f1a
+$ docker compose version
+Docker Compose version v2.29.7
 ```
 
-> You must use the docker-compose version 1.10 minimum.
+> You must use the docker-compose version 2.0 minimum.
 
 A makefile allows you to manipulate the container simply and easily.
 You have to be able to run `make -v`, which you are ready to choose:
@@ -80,18 +81,35 @@ stop:            Stop docker containers
 Start the application with `make start`:
 
 ```
-$make start
-docker-compose build
-Building app
-Step 1/19 : FROM php:7.1-fpm-alpine
-7.1-fpm-alpine: Pulling from library/php
-... # pulling image
-Successfully built 22ab66e58936
-Successfully tagged certificationycli_app:latest
-docker-compose up -d
-Recreating certificationycli_app_1
-docker exec -i -t 6929cb80f7a7df579910341c74208e05d6d5548900488c35b41c281da9fe940e /bin/bash
-bash-4.3# 
+$ make start
+docker compose build
+[+] Building 1.6s (15/15) FINISHED                                                                                                                                                                                     docker:default
+ => [app internal] load build definition from Dockerfile                                                                                                                                                                         0.0s
+ => => transferring dockerfile: 765B                                                                                                                                                                                             0.0s
+ => [app internal] load metadata for docker.io/library/php:8.3-fpm-alpine                                                                                                                                                        1.5s
+ => [app internal] load .dockerignore                                                                                                                                                                                            0.0s
+ => => transferring context: 2B                                                                                                                                                                                                  0.0s
+ => [app 1/9] FROM docker.io/library/php:8.3-fpm-alpine@sha256:17fa7702b3d48eb0c064e3410474c81f703b3bcb7a7fe8073503e6c7f157a29a                                                                                                  0.0s
+ => [app internal] load build context                                                                                                                                                                                            0.0s
+ => => transferring context: 56B                                                                                                                                                                                                 0.0s
+ => CACHED [app 2/9] RUN apk add --no-cache --virtual .persistent-deps         bash   git   icu-libs    zlib    wget   ca-certificates   curl   libzip-dev                                                                       0.0s
+ => CACHED [app 3/9] RUN set -xe  && apk add --no-cache --virtual .build-deps   autoconf   dpkg-dev dpkg   file   g++   gcc   libc-dev   make   pkgconf   re2c   icu-dev   zlib-dev  && docker-php-ext-install   intl   zip  &&  0.0s
+ => CACHED [app 4/9] WORKDIR /app                                                                                                                                                                                                0.0s
+ => CACHED [app 5/9] COPY php.ini /usr/local/etc/php/php.ini                                                                                                                                                                     0.0s
+ => CACHED [app 6/9] RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer                                                                                                    0.0s
+ => CACHED [app 7/9] RUN composer clear-cache                                                                                                                                                                                    0.0s
+ => CACHED [app 8/9] COPY start.sh /usr/local/bin/docker-app-start                                                                                                                                                               0.0s
+ => CACHED [app 9/9] RUN chmod +x /usr/local/bin/docker-app-start                                                                                                                                                                0.0s
+ => [app] exporting to image                                                                                                                                                                                                     0.0s
+ => => exporting layers                                                                                                                                                                                                          0.0s
+ => => writing image sha256:1b4cb9b355aa5911d051151e259fe2961b6a41787d47ea3062bac9ee60531c6c                                                                                                                                     0.0s
+ => => naming to docker.io/library/certificationy-cli-app                                                                                                                                                                        0.0s
+ => [app] resolving provenance for metadata file                                                                                                                                                                                 0.0s
+docker compose up -d
+[+] Running 2/2
+ ✔ Network certificationy-cli_default  Created                                                                                                                                                                                   0.1s 
+ ✔ Container certificationy-cli-app-1  Started                                                                                                                                                                                   0.4s 
+0967b159a4a3:/app# 
 ```
 
 Once the procedure is complete you can already use the bash of the container.
@@ -105,19 +123,20 @@ $ php certificationy.php
 To exit bash docker
 
 ```
-$ exit 
+$ exit
 ```
 
 Stop the application with `make stop`:
 
 ```
 $ make stop 
-docker-compose kill
-Killing certificationycli_app_1 ... done
+docker compose kill
+[+] Killing 1/1
+ ✔ Container certificationy-cli-app-1  Killed
 ```
 
 
-### Runing it through docker composer
+### Runing it through docker compose
 
 #### Start the container
 
@@ -132,7 +151,7 @@ docker compose up -d
 Execute this instruction or whatever certificationy you want.
 
 ```bash
-docker exec -it certificationy-cli_app_1 /bin/bash -c "php certificationy.php start --training"
+docker exec -it certificationy-cli-app-1 /bin/bash -c "php certificationy.php start --training"
 ```
 
 #### Stop the container
@@ -144,6 +163,7 @@ docker compose down
 ## More run options
 
 ### Select the number of questions
+
 ```
 $ php certificationy.php start --number=10
 ```
@@ -151,6 +171,7 @@ $ php certificationy.php start --number=10
 The default value is 20.
 
 ### List categories
+
 ```
 $ php certificationy.php start --list [-l]
 ```
@@ -158,6 +179,7 @@ $ php certificationy.php start --list [-l]
 Will list all the categories available.
 
 ### Only questions from certain categories
+
 ```
 $ php certificationy.php start "Automated tests" "Bundles"
 ```
@@ -167,6 +189,7 @@ Will only get the questions from the categories "Automated tests" and "Bundles".
 Use the category list from [List categories](#list-categories).
 
 ### Hide the information that questions are/aren't multiple choice
+
 ```
 $ php certificationy.php start --hide-multiple-choice
 ```
@@ -176,11 +199,13 @@ As default, the information will be displayed.
 ![Multiple choice](https://cloud.githubusercontent.com/assets/795661/3308225/721b5324-f679-11e3-8d9d-62ba32cd8e32.png "Multiple choice")
 
 ### Training mode: the solution is displayed after each question
+
 ```
 $ php certificationy.php start --training
 ```
 
 ### Set custom configuration file
+
 ```
 $ bin/certificationy start --config=../config.yml
 ```
@@ -188,6 +213,7 @@ $ bin/certificationy start --config=../config.yml
 Will set custom config file.
 
 ### And all combined
+
 ```
 $ php certificationy.php start --number=5 --hide-multiple-choice "Automated tests" "Bundles"
 ```
@@ -199,5 +225,5 @@ $ php certificationy.php start --number=5 --hide-multiple-choice "Automated test
 > Note: if you pass `--list [-l]` then you will ONLY get the category list, regarding your other settings.
 
 [docker]: https://www.docker.com
-[docker-compose]: https://docs.docker.com/compose/install/
+[docker compose]: https://docs.docker.com/compose/install/
 [make]: https://www.gnu.org/software/make/
